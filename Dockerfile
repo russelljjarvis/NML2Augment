@@ -81,8 +81,13 @@ RUN chown -R jovyan $HOME
 USER jovyan
 RUN sudo chown -R jovyan $HOME
 RUN mpiexec -np 4 python -c "import neuron"
-
+WORKDIR $HOME/mnt_morpholies
 
 RUN pip install ipyparallel
 RUN pip install distributed
 RUN pip install dask
+##
+# get mesh converter
+##
+RUN wget http://www.patrickmin.com/meshconv/download.php?id=4
+ENTRYPOINT /bin/bash
